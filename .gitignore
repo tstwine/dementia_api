@@ -1,1 +1,4 @@
 flask
+env
+.DS_Store
+*.pyc

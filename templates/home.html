@@ -1,0 +1,57 @@
+<html>
+<head>
+		<title>Alzheimers Facts</title>
+
+	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+<body>
+	<div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">Sign In</a>
+                    </li>
+                    <li role="presentation"><a href="showSignUp">Sign Up</a>
+                    </li>
+                </ul>
+            </nav>
+            <h1 class="text-muted">Alzheimers Facts</h1>
+        </div>
+
+      <div class="jumbotron">
+            <h3>Learn About Different Types of Alzheimers</h3>
+            <p class="lead"></p>
+            <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up today</a>
+            </p>
+        </div>
+ 
+			
+<h1>{{ alzheimers.question }}</h1>
+
+
+<ul>
+{% for dementia_type in dementia_types %}
+    <li><a href="/dementia_types/{{ dementia_type.id }}">{{ dementia_type.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+<ul><h3>Comments</h3>
+    {% for comment in comments %}
+        <li>{{comment.name}} , {{comment.timeposted}} , {{comment.text}} </li>
+     {% endfor %}
+   </ul>     
+
+	<form method="POST" action='/comment'>
+		
+			<input type="text" name="name"><br>
+		      <input type="text" name="text"><br>
+			<input type="submit" value="Submit" />
+
+		</form>			
+
+
+  </body>
+</html>

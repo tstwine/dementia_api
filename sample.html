@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Python Programming Tutorials</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<header>
+	<div class="navbar-header">
+      <a class="navbar-brand" href="/">
+	  <img style="max-width:120px; margin-top: -7px;" src="{{ url_for('static', filename='images/mainlogo.png') }}">
+	  </a>
+    </div>
+
+	<div class = "container-fluid">
+		<a href="/dashboard/"><button type="button" class="btn btn-primary" aria-label="Left Align" style="margin-top: 5px; margin-bottom: 5px; height: 44px; margin-right: 15px">
+		  <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Start Learning
+		</button></a>
+		<div style="margin-right: 10px; margin-left: 15px; margin-top: 5px; margin-bottom: 5px;"  class="container-fluid">	
+		</div>
+	</div>
+</header>
+
+<body>
+
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	
+</body>
+
+</html>
+
+
+<title>{{ dementia.question }}</title>
+</head>
+<body>
+	<h1>{{ dementia.question }}</h1>
+	<form action='/information/characteristics'>
+		{% for e in dementia.fields %}
+			<input type="radio" name="field" value="{{ e }}"> {{ e }}<br>
+		{% endfor %}
+			<input type="submit" value="Submit" />
+
+</form>
+
+
+
+# return render_template('hello.html', name=name) 
+# @app.route('/home/')
+# @app.route('/home/<dementia_types>')
+# def hello():
+#       pass 
+
+
+@auth.get_password
+def get_password(username):
+    if username == 'tina':
+        return 'dementia'
+    return None
+
+    # except Exception as e:
+    #         flash(e)
+    #         return render_template
+
+
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+
+<form action='/information/alzheimers'>
