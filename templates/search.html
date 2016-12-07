@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Search Address</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+ 
+ 
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">Sign In</a>
+                    </li>
+                    <li role="presentation"><a href="#">Sign Up</a>
+                    </li>
+                </ul>
+            </nav>
+            <h1>Search Address</h1>
+
+        </div>
+ 
+       
+
+<div class="jumbotron">
+
+  <div class="jumbotron">
+            <h2>Find Senior Living Near You</h2>
+            <p class="lead"></p>
+            
+
+  <form action="/search/" method="POST">
+      <label>Address Line 1</label>
+      <input type="text" name="addressLine1">
+      <label>City</label>
+      <input type="text" name="city">
+      <label>State</label>
+      <input type="text" name="state">
+      <label>Zip Code</label>
+      <input type="number" name="zipCode">
+      <input type="submit" value='Submit' class="btn btn-lg btn-success">
+            
+
+      {% if error_message %}
+      {{ error_message }}
+      {% endif %} 
+ </form>
+
+ </div>   
+
+   </div>  
+        
+       
+        {% if data %}
+            <ul class="list-group"><h3>Memory Care Facilities</h3>
+        {% for memory_care_facility in data %}
+        <li class="list-group-item">{{ memory_care_facility[1] }}, {{ memory_care_facility[2] }}, {{ memory_care_facility[6] }} {{ memory_care_facility[7] }} {{ memory_care_facility[8] }} {{ memory_care_facility[3] }} {{memory_care_facility[4] }} <a target="_blank" href="{{memory_care_facility[5] }}">{{memory_care_facility[5] }}</a></li>
+        {% endfor %}
+            </ul>
+        {% endif %}
+        
+     
+
+    <img src="{{url_for('static', filename='images/senior-couple.jpg') }}" />
+
+</body>
+ 
+</html>

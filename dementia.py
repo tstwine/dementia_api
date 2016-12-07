@@ -1,47 +1,3 @@
-#!flask/bin/python
-from flask import Flask, jsonify, render_template, flash, request, url_for, redirect
-from flask import abort
-from flask import make_response
-from flask_httpauth import HTTPBasicAuth
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
-auth = HTTPBasicAuth()
-
-# import alzheimers
-alzheimers = []
-name = []
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    text = db.Column(db.Text)
-    timeposted = db.Column(db.DateTime)
-
-    def __init__(self, name, text):
-        self.name = name
-        self.text = text
-        self.timeposted = datetime.now()
-
-    def __repr__(self):
-        return '<Comment %r, %r, %r>' % (self.name, self.text, self.timeposted)
-
-    
-
-alzheimers_data = {
-        'question':'What do you want to know about the different types of dementia?',
-       'fields': [ """Alzheimer's Disease""",
-                   'Vascular Dementia',
-                   'Dementia_with_Lewy_bodies',
-                   'Mixed_Dementia',
-                   'Parkinsons',
-                   'Creutzfeldt_Jakob_Disease',
-                   'Normal_Pressure_Hydrocephalus']
-    }
-
 dementia_types = [
     {
         'id': 1,
@@ -51,7 +7,7 @@ dementia_types = [
                      Alzheimer's disease is the most common cause of dementia among older adults.""",
         "diagnosis": """Ask the person and a family member or friend questions about overall health, past medical problems, ability to carry out 
                      daily activities, and changes in behavior and personality, conduct tests of memory, problem solving, attention, counting, and language,
-                     Conduct tests of memory, problem solving, attention, counting, and language,
+                     Conduct tests of memory, problem solving, attention, counting, and language.
                      Carry out standard medical tests, such as blood and urine tests, to identify other possible causes of the problem,
                      Perform brain scans, such as computed tomography (CT), magnetic resonance imaging (MRI), or positron emission tomography (PET), 
                      to rule out other possible causes for symptoms.""",
@@ -102,7 +58,7 @@ dementia_types = [
 
     'id': 3,
     "name":"Dementia_with_Lewy_bodies",
-    "definition":"""definition":Dementia with Lewy bodies (DLB) is a type of progressive dementia that leads to a decline in thinking, reasoning and independent function 
+    "definition":"""Dementia with Lewy bodies (DLB) is a type of progressive dementia that leads to a decline in thinking, reasoning and independent function 
                  because of abnormal microscopic deposits that damage brain cells over time. Most experts estimate that dementia with Lewy bodies is the 
                  third most common cause of dementia after Alzheimer's disease and vascular dementia.""",
     "diagnosis":"""Dementia symptoms consistent with DLB develop first, when both dementia symptoms and movement symptoms are present at the time of diagnosis,
@@ -152,8 +108,8 @@ dementia_types = [
     "diagnosis":"""A person diagnosed with Parkinson's based on movement symptoms and dementia symptoms don't appear until a year or more later. The 
                 diagnosis is dementia with Lewy bodies when dementia appear within one year after movement symptoms. When movement symptoms develop within
                 a year of a dementia with Lewy bodies diagnosis.""",
-    "symptoms":"""Changes in memory, concentration and judgment, trouble interpreting visual information, Muffled speech, Visual hallucinations,
-                Delusions, especially paranoid ideas, depression, Irritability and anxiety, and Sleep disturbances, including excessive daytime drowsiness 
+    "symptoms":"""Changes in memory, concentration and judgment, trouble interpreting visual information, muffled speech, visual hallucinations,
+                delusions, especially paranoid ideas, depression, irritability and anxiety, and sleep disturbances, including excessive daytime drowsiness 
                 and rapid eye movement (REM) sleep disorder.""",
     "causes":"""Certain factors at the time of Parkinson's diagnosis may increase future dementia risk, including older age, greater severity of motor symptoms, 
                 and having mild cognitive impairment (MCI).""",
@@ -163,7 +119,7 @@ dementia_types = [
     },
 
         {
-    'id': 7,
+    'id': 6,
     "name":"Creutzfeldt_Jakob_Disease",
     "definition":"""Creutzfeldt-Jakob disease (CJD) is the most common human form of a group of rare, fatal brain disorders known as prion diseases.
                 Creutzfeldt-Jakob disease causes a type of dementia that gets worse unusually fast. More common causes of dementia, such as Alzheimer's, 
@@ -187,7 +143,7 @@ dementia_types = [
 
 
     {
-    'id': 8,
+    'id': 7,
     "name":"Normal_Pressure_Hydrocephalus",
     "definition":"""Normal Pressure Hydrocephalus is a brain disorder in which excess cerebrospinal fluid Normal pressure hydrocephalus is a 
                 brain disorder in which excess cerebrospinal fluid. Normal pressure hydrocephalus occurs when excess cerebrospinal fluid accumulates in 
@@ -207,76 +163,3 @@ dementia_types = [
     },
 
 ]
-
-@auth.get_password
-def get_password(username):
-    if username == 'tina':
-        return 'dementia'
-    return None
-
-
-
-@app.route('/dementia_types', methods=['GET'])
-@auth.login_required
-def get_dementia_types():
-    return jsonify({'dementia_types': dementia_types})
-
-
-@app.route('/dementia_types/<int:dementia_type_id>', methods=['GET'])
-@auth.login_required
-def get_dementia_type(dementia_type_id):
-
-    for dementia_type in dementia_types:
-        if dementia_type['id'] == dementia_type_id:
-            return jsonify({'dementia_type': dementia_type})
-
-    abort(404)
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
-
-@auth.error_handler
-def unauthorized():
-    return make_response(jsonify({'error': 'Unauthorized access'}), 401)
-
-    
-     
-
-@app.route('/')
-def home():
-
-    comments = Comment.query.all()
-    
-    return render_template('home.html', alzheimers=alzheimers_data, dementia_types=dementia_types, comments=comments)
-
-@app.route("/information/<subject>")
-def information(subject):  
-    return  render_template('information.html', information=information)
-
-@app.route('/showSignUp')
-def showSignUp():
-    return render_template('signup.html')
-
-@app.route('/comment', methods=['GET', 'POST'])
-def createComment():
-
-    name = request.form.get("name")
-    text = request.form.get("text")
-    comment = Comment(name, text)
-    db.session.add(comment)
-    db.session.commit()
-
-    return render_template('comment.html', comment=comment)
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-    
-
-
-
-    

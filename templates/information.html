@@ -1,8 +1,49 @@
 <html>
 <head>
-	<title>{{ information }}</title>
+	<title>{{ data[0] }}</title>
 </head>
 <body>
-    {{ information }}
+    <h1>{{ data[0] }}</h1>
+    	<br>
+    <h3>definition</h3>
+    <p>{{ data[1] }}</p>
+    	<br>
+    <h3>diagnosis</h3>
+    <p>{{ data[2] }}</p>
+    	<br>
+    {% if data[3] %}
+    <h3>types</h3>
+    <p>{{ data[3] }}</p>
+    	<br>
+    {% endif %}	
+    <h3>treatments</h3>
+    {% if data[4] %}
+    <p>{{data[4] }}</p>
+    {% else %}
+    <p>There are no treatments available at this time.</p>
+    {% endif %}
+    	<br>
+    <h3>causes</h3>	
+    {% if data[5] %}
+    <p>{{data[5] }}</p>
+    {% else %}
+    <p>There are no known causes for this disease at this time.</p>
+    {% endif %}
+    	<br>
+    <h3>symptons</h3>	
+    {% if data[6] %}
+    <p>{{data[6] }}</p>	
+    {% else %}
+    <p>There are no known symptons for this disese at this time.</p>
+    {% endif %}
+    	<br>
+    <h3>medications</h3>
+    {% if data[7] %}
+    <p>{{data[7] }}</p>
+    {% else %}
+    <p>There are no medications avaialable for this disease at this time.</p>
+    {% endif %}	
+    	<br>
+
 </body>
 </html>

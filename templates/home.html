@@ -13,7 +13,7 @@
                     </li>
                     <li role="presentation"><a href="#">Sign In</a>
                     </li>
-                    <li role="presentation"><a href="showSignUp">Sign Up</a>
+                    <li role="presentation"><a href="/search">Sign Up</a>
                     </li>
                 </ul>
             </nav>
@@ -23,17 +23,17 @@
       <div class="jumbotron">
             <h3>Learn About Different Types of Alzheimers</h3>
             <p class="lead"></p>
-            <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign up today</a>
+            <p><a class="btn btn-lg btn-success" href="/search">Sign up today</a>
             </p>
         </div>
  
 			
-<h1>{{ alzheimers.question }}</h1>
+<h1>What do you want to know about the different types of dementia?</h1>
 
 
 <ul>
 {% for dementia_type in dementia_types %}
-    <li><a href="/dementia_types/{{ dementia_type.id }}">{{ dementia_type.name }}</a></li>
+    <li><a href="/dementia_types/{{ dementia_type[0] }}">{{ dementia_type[1] }}</a></li>
 {% endfor %}
 </ul>
 
@@ -52,6 +52,7 @@
 
 		</form>			
 
+        
 
   </body>
 </html>

@@ -1,0 +1,3 @@
+SQLALCHEMY_DATABASE_URI = 'sqlite:///appdb.db'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+UPLOAD_FOLDER = '/static/images'
