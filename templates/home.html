@@ -3,24 +3,30 @@
 		<title>Alzheimers Facts</title>
 
 	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-<body>
+
+<body style="background: #FFFFFF">
 	<div class="container">
         <div class="header">
+            <h2 class="text-muted">Alzheimers Facts</h2>
             <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a>
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active"><a href="/">Home</a>
                     </li>
-                    <li role="presentation"><a href="#">Sign In</a>
+                    <li role="presentation"><a href="/login">Login</a>
                     </li>
-                    <li role="presentation"><a href="/search">Sign Up</a>
+                    <li role="presentation"><a href="/search">Memory Care Facilities</a>
+                    </li>
+                    <li role="presentation"><a href="/senior">Senior Day Centers</a>
                     </li>
                 </ul>
             </nav>
-            <h1 class="text-muted">Alzheimers Facts</h1>
         </div>
 
-      <div class="jumbotron">
+    <div class="row">
+
+    <div class="col-md-8">
+
+              <div class="jumbotron">
             <h3>Learn About Different Types of Alzheimers</h3>
             <p class="lead"></p>
             <p><a class="btn btn-lg btn-success" href="/search">Sign up today</a>
@@ -28,14 +34,24 @@
         </div>
  
 			
-<h1>What do you want to know about the different types of dementia?</h1>
+    <h1>What do you want to know about the different types of dementia?</h1>
 
 
-<ul>
-{% for dementia_type in dementia_types %}
-    <li><a href="/dementia_types/{{ dementia_type[0] }}">{{ dementia_type[1] }}</a></li>
-{% endfor %}
-</ul>
+        <ul>
+        {% for dementia_type in dementia_types %}
+
+            <li style="font-size: 18px"><a href="/dementia_types/{{ dementia_type[0] }}">{{ dementia_type[1] }}</a></li>
+        {% endfor %}
+        </ul>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <img src="{{url_for('static', filename='images/alzheimerspoem1.jpg') }}" />
+    </div>
+
+</div>
 
 
 <ul><h3>Comments</h3>
@@ -52,7 +68,7 @@
 
 		</form>			
 
-        
+    
 
   </body>
 </html>

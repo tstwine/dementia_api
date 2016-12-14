@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Senior Day Care Centers</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+ 
+ 
+</head>
+  
+
+  
+            
+
+  <body>
+
+    <div class="container">
+
+      <div class="header">
+        <h2 class="text-muted">Senior Day Center Directory</h2>
+            <nav>
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="/">Home</a>
+                    </li>
+                    <li role="presentation"><a href="/login">Login</a>
+                    </li>
+                    <li role="presentation"><a href="/search">Memory Care Facilities</a>
+                    </li>
+                    <li role="presentation" class="active"><a href="/senior">Senior Day Centers</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+      <div class="jumbotron">
+            
+
+    <form action="/senior/" method="POST">
+      <div class="form-group">
+      <label>Address Line 1</label>
+      <input type="text" name="addressLine1" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>City</label>
+      <input type="text" name="city" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>State</label>
+      <input type="text" name="state" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Zip Code</label>
+      <input type="number" name="zipCode" class="form-control">
+    </div>
+
+      <input type="submit" value='Submit' class="btn btn-lg btn-success">
+
+        </form>
+
+
+            {% if error %}
+      {{ error }}
+    {% endif %}
+
+  </div>
+
+    {% if data %}
+            <ul class="list-group"><h3>Senior Day Centers</h3>
+        {% for senior_day_center in data %}
+        <li class="list-group-item"> {{senior_day_center[1]}}, <br>{{ senior_day_center[2] }}, <br> 
+          {{ senior_day_center[3] }}, {{ senior_day_center[4] }}, {{ senior_day_center[5] }}, <br>
+          {{ senior_day_center[6]}} <br><a target="_blank" href="{{senior_day_center[7] }}">{{senior_day_center[7] }}</a></li>
+        {% endfor %}
+            </ul>
+        {% endif %}
+
+
+        
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

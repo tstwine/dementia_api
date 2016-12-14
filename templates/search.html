@@ -16,48 +16,52 @@
 <body>
  
     <div class="container">
-        <div class="header">
+              <div class="header">
+                <h2 class="text-muted">Find Senior Living Near You</h2>
             <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a>
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="/">Home</a>
                     </li>
-                    <li role="presentation"><a href="#">Sign In</a>
+                    <li role="presentation"><a href="/login">Login</a>
                     </li>
-                    <li role="presentation"><a href="#">Sign Up</a>
+                    <li class="active"role="presentation"><a href="/search">Memory Care Facilities</a>
+                    </li>
+                    <li role="presentation"><a href="/senior">Senior Day Centers</a>
                     </li>
                 </ul>
             </nav>
-            <h1>Search Address</h1>
-
+            
         </div>
  
-       
-
-<div class="jumbotron">
 
   <div class="jumbotron">
-            <h2>Find Senior Living Near You</h2>
-            <p class="lead"></p>
+            
             
 
   <form action="/search/" method="POST">
+    <div class="form-group">
       <label>Address Line 1</label>
-      <input type="text" name="addressLine1">
+      <input class="form-control" type="text" name="addressLine1" placeholder="123 Main St">
+      </div>
+     <div class="form-group"> 
       <label>City</label>
-      <input type="text" name="city">
+      <input class="form-control" type="text" name="city" placeholder="Anywhere">
+      </div>
+      <div class="form-group"> 
       <label>State</label>
-      <input type="text" name="state">
+      <input class="form-control" type="text" name="state" placeholder="VA">
+      </div>
+      <div class="form-group"> 
       <label>Zip Code</label>
-      <input type="number" name="zipCode">
+      <input class="form-control" type="number" name="zipCode" placeholder="12345">
+      </div>
       <input type="submit" value='Submit' class="btn btn-lg btn-success">
             
+      {% if error %}
+        {{ error }}
+      {% endif %}
 
-      {% if error_message %}
-      {{ error_message }}
-      {% endif %} 
- </form>
-
- </div>   
+ </form>  
 
    </div>  
         
@@ -65,7 +69,14 @@
         {% if data %}
             <ul class="list-group"><h3>Memory Care Facilities</h3>
         {% for memory_care_facility in data %}
-        <li class="list-group-item">{{ memory_care_facility[1] }}, {{ memory_care_facility[2] }}, {{ memory_care_facility[6] }} {{ memory_care_facility[7] }} {{ memory_care_facility[8] }} {{ memory_care_facility[3] }} {{memory_care_facility[4] }} <a target="_blank" href="{{memory_care_facility[5] }}">{{memory_care_facility[5] }}</a></li>
+        <li class="list-group-item">
+          {{ memory_care_facility[1] }}<br>
+          {{ memory_care_facility[2] }}<br>
+          {{ memory_care_facility[6] }}, {{ memory_care_facility[7] }} {{ memory_care_facility[8] }}<br>
+          {{ memory_care_facility[3] }}<br>
+          {{memory_care_facility[4] }}
+          <a target="_blank" href="{{memory_care_facility[5] }}">{{memory_care_facility[5] }}</a>
+        </li>
         {% endfor %}
             </ul>
         {% endif %}
