@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Brain Tour</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+ 
+ 
+</head>
+ 
+  <body>
+ 
+    <div class="container">
+              <div class="header">
+                <h2 class="text-muted">Brain</h2>
+            <nav>
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="/">Home</a>
+                    </li>
+                    <li role="presentation"><a href="/login">Login</a>
+                    </li>
+                    <li role="presentation"><a href="/search">Memory Care Facilities</a>
+                    </li>
+                    <li role="presentation"><a href="/senior">Senior Day Centers</a>
+                    </li>
+                    <li role="presentation"><a href="/blog">Blog</a>
+                    </li> 
+                     <li role="presentation"><a href="/brain_tour">Brain Tour</a>
+                    </li>  
+                    </li>
+                </ul>
+            </nav>
+            
+        </div>
+            <div>
+                <img src="{{url_for('static', filename='images/brainlobesmap.jpg')}}"/>
+             </div>   
+
+        <div>
+            <a target="_blank" href="http://www.alz.org/alzheimers_disease_4719">
+                Click the link Brain Tour for an interactive tour of the brain and how Alzheimer's affects it.</a>
+           </div>     
+ 
+
+</body>
+ 
+</html>

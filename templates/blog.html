@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- On the blog html-query all the POST
+on blog route query all post the same as I queried comments, then pass them into template of Blog.html same as comment.html.
+structured the format of the form through iterating it and display it nicely. -->
+
+
  
 <head>
     <title>Blog</title>
  
  
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <body style="background: #EBE8AB">
  
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <link href="../static/signup.css" rel="stylesheet">
@@ -13,7 +20,7 @@
  
 </head>
  
-<body>
+
  
     <div class="container">
               <div class="header">
@@ -27,6 +34,10 @@
                     <li role="presentation"><a href="/search">Memory Care Facilities</a>
                     </li>
                     <li role="presentation"><a href="/senior">Senior Day Centers</a>
+                    <li role="presentation"><a href="/blog">Blog</a>  
+                    </li>  
+                    <li role="presentation"><a href="/brain_tour">Brain Tour</a>
+                    </li>  
                     </li>
                 </ul>
             </nav>
@@ -52,6 +63,19 @@
       {{ post.text }}
     {% endif %}
   
+
+      <h2>Living with Alzheimer's</h2>
+        <div>
+            <a target="_blank" href="https://youtu.be/4QqL4i0Clyk">
+                A Message People from People Living with Alzheimer's.</a>
+           </div>     
+ 
+
+          
+
 </body>
  
 </html>
+
+
+

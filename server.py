@@ -88,7 +88,7 @@ def search():
 
     return render_template('search.html', data=new_data, error=error)
 
-
+# senior_day_center query
 @app.route('/senior/', methods=['GET', 'POST'])
 def senior():
 
@@ -137,10 +137,6 @@ def senior():
 
     return render_template('senior.html', data=senior_data, error=error)
 
-
-         
-
-
 # login route
 @app.route('/comment', methods=['GET', 'POST'])
 def createComment():
@@ -148,13 +144,30 @@ def createComment():
     name = request.form.get("name")
     text = request.form.get("text")
 
-    from models import db, Comment
+    from models import db, Comment 
 
     comment = Comment(name, text)
     db.session.add(comment)
     db.session.commit()
 
     return render_template('comment.html', comment=comment)
+
+@app.route('/post', methods=["GET", "POST"])
+def post():
+    title = request.form.get("title")
+    author = request.form.get("author")
+    text = request.form.get("text")
+
+    from models import db, post
+
+    post = Post(title, author, text)
+    db.session.add(post)
+    db.session.commit()
+
+    comments = Comment.query.all()
+    return render_template('blog.html', post=post)
+
+
 
 
 # route for handling the login page logic
@@ -177,7 +190,7 @@ def blog():
         
         print request.form
 
-        from models import db, Post
+        from models import db, post
 
         title = request.form.get('title')
         text = request.form.get('text')
@@ -188,10 +201,17 @@ def blog():
 
         print post
 
-    return render_template('blog.html', post=post)    
+    return render_template('blog.html', post=post)  
 
 
 
+
+@app.route('/brain_tour')
+def brain_tour():
+    brain = "alzheimers"
+    return render_template('brain.html', brain=brain)
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)  

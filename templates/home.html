@@ -3,8 +3,8 @@
 		<title>Alzheimers Facts</title>
 
 	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<body style="background: #FFFFFF">
+    
+<body style="background: #EBE8AB">
 	<div class="container">
         <div class="header">
             <h2 class="text-muted">Alzheimers Facts</h2>
@@ -18,6 +18,11 @@
                     </li>
                     <li role="presentation"><a href="/senior">Senior Day Centers</a>
                     </li>
+                     <li role="presentation"><a href="/blog">Blog</a>
+                    </li>
+                    <li role="presentation"><a href="/brain_tour">Brain Tour</a>
+                    </li>
+
                 </ul>
             </nav>
         </div>
@@ -45,10 +50,10 @@
         </ul>
 
     </div>
-
     <div class="col-md-4">
+        
 
-        <img src="{{url_for('static', filename='images/alzheimerspoem1.jpg') }}" />
+        <img id="poem" src="{{url_for('static', filename='images/alzheimerspoem1.jpg') }}" />
     </div>
 
 </div>
