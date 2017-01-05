@@ -34,6 +34,7 @@ structured the format of the form through iterating it and display it nicely. --
                     <li role="presentation"><a href="/search">Memory Care Facilities</a>
                     </li>
                     <li role="presentation"><a href="/senior">Senior Day Centers</a>
+                    </li>
                     <li role="presentation"><a href="/blog">Blog</a>  
                     </li>  
                     <li role="presentation"><a href="/brain_tour">Brain Tour</a>
@@ -43,34 +44,32 @@ structured the format of the form through iterating it and display it nicely. --
             </nav>
             
         </div>
+
+        
  
   <form method="POST" action='/blog'>
     
-      <label>Title</label>
+      <label><h2>Title</label></h2>
       <input type="text" name="title"><br>
-      <label>Author</label>
+      <label><h2>Author</label></h2>
       <input type="text" name="author"><br>
-      <label>Text</label>
+      <label><h2>Text</label></h2>
       <input type="text" name="text"><br>
       <input type="submit" value="Post" />
 
     </form>
 
-    {% if post %}
-      {{ post.title }}
-      {{ post.author }}
-      {{ post.timeposted }}
-      {{ post.text }}
-    {% endif %}
+    <hr>  
+
+    {% for post in posts %}
+      <div>
+          <h3>{{ post.title }}</h3>
+            <i>{{ post.timeposted }}</i>
+             <p>{{ post.text }}</p>
+        </div>
+        {% endfor %}
   
-
-      <h2>Living with Alzheimer's</h2>
-        <div>
-            <a target="_blank" href="https://youtu.be/4QqL4i0Clyk">
-                A Message People from People Living with Alzheimer's.</a>
-           </div>     
- 
-
+  
           
 
 </body>

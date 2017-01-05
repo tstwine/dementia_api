@@ -6,4 +6,5 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask.ext.security import Security, SQLAlchemyUserDatastore, \
     UserMixin, RoleMixin, login_required
-import psycopg2    
+import psycopg2  
+ 

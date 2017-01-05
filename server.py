@@ -10,6 +10,7 @@ auth = HTTPBasicAuth()
 
 
 
+
 @auth.get_password
 def get_password(username):
     if username == 'tina':
@@ -28,19 +29,21 @@ def get_dementia_type(dementia_type_id):
     print data
     return render_template("information.html", data=data[0])
 
+
+
 # comment route query
 @app.route('/')
 def home():
-    from models import db, Comment
+    #from models import db, Comment
     conn = psycopg2.connect(database="testdb", user="tinastith-twine", host="127.0.0.1", port="5432")
     cur = conn.cursor()
     cur.execute('SELECT id, name FROM memory;')
     data = cur.fetchall()
     conn.close
     print data
-    comments = Comment.query.all() # this code is used for SQLAlchemy only.
+    #comments = Comment.query.all() # this code is used for SQLAlchemy only.
     
-    return render_template('home.html', dementia_types=data, comments=comments)
+    return render_template('home.html', dementia_types=data)
 
 # memory_care_facilities query
 @app.route('/search/', methods=['GET','POST'])
@@ -137,35 +140,35 @@ def senior():
 
     return render_template('senior.html', data=senior_data, error=error)
 
-# login route
-@app.route('/comment', methods=['GET', 'POST'])
-def createComment():
+# # login route
+# @app.route('/comment', methods=['GET', 'POST'])
+# def createComment():
 
-    name = request.form.get("name")
-    text = request.form.get("text")
+#     name = request.form.get("name")
+#     text = request.form.get("text")
 
-    from models import db, Comment 
+#     from models import db, Comment 
 
-    comment = Comment(name, text)
-    db.session.add(comment)
-    db.session.commit()
+#     comment = Comment(name, text)
+#     db.session.add(comment)
+#     db.session.commit()
 
-    return render_template('comment.html', comment=comment)
+#     return render_template('comment.html', comment=comment)
 
-@app.route('/post', methods=["GET", "POST"])
-def post():
-    title = request.form.get("title")
-    author = request.form.get("author")
-    text = request.form.get("text")
+# @app.route('/post', methods=["GET", "POST"])
+# def createPost():
+#     title = request.form.get("title")
+#     author = request.form.get("author")
+#     text = request.form.get("text")
 
-    from models import db, post
+#     from models import db, post
 
-    post = Post(title, author, text)
-    db.session.add(post)
-    db.session.commit()
+#     post = Post(title, author, text)
+#     db.session.add(post)
+#     db.session.commit()
 
-    comments = Comment.query.all()
-    return render_template('blog.html', post=post)
+#     comments = Comment.query.all()
+#     return render_template('blog.html', post=post)
 
 
 
@@ -184,13 +187,13 @@ def login():
 @app.route('/blog', methods=['GET', 'POST'])
 def blog():
 
-    post = None
+    from models import db, Post, Comment    
 
     if request.method == 'POST':
         
         print request.form
 
-        from models import db, post
+        
 
         title = request.form.get('title')
         text = request.form.get('text')
@@ -201,7 +204,9 @@ def blog():
 
         print post
 
-    return render_template('blog.html', post=post)  
+    posts = Post.query.all()
+
+    return render_template('blog.html', posts=posts)  
 
 
 
