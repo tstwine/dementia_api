@@ -1,0 +1,68 @@
+<html>
+
+<head>
+
+<style>
+
+body {
+	overflow: hidden;
+}
+
+#modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 100px;
+	border: 1px solid #000;
+	background-color: #AAA;
+
+	transform: translate(-50%,-50%);
+	z-index: 1;
+}
+
+#smokescreen {
+	background-color: #fff;
+	opacity: .5;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	pointer-events: none;	
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="smokescreen">
+</div>
+	<div id="modal">
+		<p>Modal content</p>
+		<button id="closeButton">Close</button>
+	</div>
+
+<div id="page">
+	</div>
+    <div class="col-md-4">
+
+        <img id="poem" src="{{url_for('static', filename='images/AgingCare.pdf') }}" />
+    </div>
+
+</div>
+</div>
+
+
+<script>
+$('#closeButton').on('click', function() {
+	$('#modal').remove();
+	$('#smokescreen').remove();
+	$('body').css({'overflow':'auto'});
+});
+</script>
+
+</body>
+
+</html>

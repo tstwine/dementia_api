@@ -26,7 +26,7 @@ def get_dementia_type(dementia_type_id):
     cur.execute('SELECT * FROM memory WHERE id=%s;' %dementia_type_id)
     data = cur.fetchall()
     conn.close
-    print data
+    #print data
     return render_template("information.html", data=data[0])
 
 
@@ -40,7 +40,7 @@ def home():
     cur.execute('SELECT id, name FROM memory;')
     data = cur.fetchall()
     conn.close
-    print data
+    #print data
     #comments = Comment.query.all() # this code is used for SQLAlchemy only.
     
     return render_template('home.html', dementia_types=data)
@@ -65,7 +65,7 @@ def search():
                 address_zip=zipcode,
             )
 
-            print verify_address
+            #print verify_address
 
             city = verify_address['address']['address_city'].title()
             state = verify_address['address']['address_state']
@@ -76,7 +76,7 @@ def search():
             data = cur.fetchall()
             conn.close
 
-            print data
+            #print data
 
             for memory_care_facility in data:
                 new_row = []
@@ -85,7 +85,7 @@ def search():
                     new_row.append(new_item)
                 new_data.append(new_row)
 
-            print new_data
+            #print new_data
         except Exception as error:
             pass
 
@@ -113,7 +113,7 @@ def senior():
                 address_zip=zipcode
             )
 
-            print verify_address
+            #print verify_address
 
             city = verify_address['address']['address_city'].title()
             state = verify_address['address']['address_state']
@@ -133,7 +133,7 @@ def senior():
                     new_row.append(new_item)
                 senior_data.append(new_row)
 
-            print senior_data
+            #print senior_data
 
         except Exception as error:
             pass
@@ -191,7 +191,7 @@ def blog():
 
     if request.method == 'POST':
         
-        print request.form
+        #print request.form
 
         
 
@@ -202,7 +202,7 @@ def blog():
         db.session.add(post)
         db.session.commit()
 
-        print post
+        #print post
 
     posts = Post.query.all()
 
@@ -216,10 +216,16 @@ def brain_tour():
     brain = "alzheimers"
     return render_template('brain.html', brain=brain)
 
+@app.route('/ebook')
+def ebook():
+    ebook = "caring for alzheimers"
+    return render_template('ebook.html', ebook=ebook)
+
+
     
 
 if __name__ == '__main__':
-    app.run(debug=True)  
+    app.run(debug=False)  
 
 
 
